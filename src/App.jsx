@@ -1,25 +1,23 @@
 import { useState } from 'react'
 
 import { Body, LeftPanel } from './layouts'
-
 import {
-	CardButton,
 	Header,
 	JournalAddButton,
 	JournalForm,
-	JournalItem,
 	JournalList
 } from './components'
 
 import styles from './App.module.scss'
 
 const INITIAL_DATA = [
-	{
-		title: 'My title',
-		date: new Date(),
-		tag: 'My text',
-		text: 'Hi'
-	}
+	// {
+	// 	id: 1,
+	// 	title: 'My title',
+	// 	date: new Date(),
+	// 	tag: 'My text',
+	// 	text: 'Hi'
+	// }
 ]
 
 export const App = () => {
@@ -29,6 +27,7 @@ export const App = () => {
 		setItems(prev => [
 			...prev,
 			{
+				id: Math.max(...prev.map(item => item.id)) + 1,
 				title: item.title,
 				date: new Date(item.date),
 				text: item.text
@@ -41,13 +40,7 @@ export const App = () => {
 			<LeftPanel>
 				<Header />
 				<JournalAddButton />
-				<JournalList>
-					{items.map(({ title, text, date }) => (
-						<CardButton key={title}>
-							<JournalItem title={title} text={text} date={date} />
-						</CardButton>
-					))}
-				</JournalList>
+				<JournalList items={items} />
 			</LeftPanel>
 			<Body>
 				<JournalForm onSubmit={addItem} />
