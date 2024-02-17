@@ -1,13 +1,31 @@
-import { CardButton, JournalItem } from './components'
+import { Body, LeftPanel } from './layouts'
+
+import {
+	CardButton,
+	Header,
+	JournalAddButton,
+	JournalItem,
+	JournalList
+} from './components'
 
 import styles from './App.module.scss'
 
 export const App = () => {
 	return (
 		<div className={styles.app}>
-			<CardButton>
-				<JournalItem title='Какой-то заголовок' text='Какой-то текст' />
-			</CardButton>
+			<LeftPanel>
+				<Header />
+				<JournalAddButton />
+				<JournalList>
+					<CardButton>
+						<JournalItem title='Title' text='Description' />
+					</CardButton>
+					<CardButton>
+						<JournalItem title='Title' text='Description' />
+					</CardButton>
+				</JournalList>
+			</LeftPanel>
+			<Body>Body</Body>
 		</div>
 	)
 }
