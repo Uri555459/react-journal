@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Body, LeftPanel } from './layouts'
 import {
@@ -10,24 +10,32 @@ import {
 
 import styles from './App.module.scss'
 
-const INITIAL_DATA = [
-	// {
-	// 	id: 1,
-	// 	title: 'My title',
-	// 	date: new Date(),
-	// 	tag: 'My text',
-	// 	text: 'Hi'
-	// }
-]
-
 export const App = () => {
-	const [items, setItems] = useState(INITIAL_DATA)
+	const [items, setItems] = useState([])
+
+	useEffect(() => {
+		const data = JSON.parse(localStorage.getItem('data'))
+		if (data) {
+			setItems(
+				data.map(item => ({
+					...item,
+					date: new Date(item.date)
+				}))
+			)
+		}
+	}, [])
+
+	useEffect(() => {
+		if (items.length) {
+			localStorage.setItem('data', JSON.stringify(items))
+		}
+	}, [items])
 
 	const addItem = item => {
 		setItems(prev => [
 			...prev,
 			{
-				id: Math.max(...prev.map(item => item.id)) + 1,
+				id: prev.length > 0 ? Math.max(...prev.map(item => item.id)) + 1 : 1,
 				title: item.title,
 				date: new Date(item.date),
 				text: item.text
