@@ -1,11 +1,11 @@
+import cn from 'clsx'
+
 import styles from './Button.module.scss'
 
-export const Button = ({ children }) => {
-	const clicked = () => {}
-
+export const Button = ({ text = '', onClick = () => {} }) => {
 	return (
-		<button onClick={clicked} className={styles.button}>
-			{children}
+		<button className={cn(styles.button, styles.accent)} onClick={onClick}>
+			{text}
 		</button>
 	)
 }
