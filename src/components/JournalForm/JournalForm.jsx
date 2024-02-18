@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useRef } from 'react'
 import cn from 'clsx'
 
-import { Button } from '../'
+import { Button, Input } from '../'
 
 import { INITIAL_STATE, formReducer } from './JournalForm.state'
 
@@ -72,15 +72,14 @@ export const JournalForm = ({ onSubmit }) => {
 	return (
 		<form className={styles['journal-form']} onSubmit={addJournalItem}>
 			<div className={styles['form-row']}>
-				<input
+				<Input
 					type='text'
 					name='title'
 					ref={titleRef}
 					value={values.title}
-					className={cn(styles['input'], {
-						[styles.invalid]: !isValid.title
-					})}
+					isValid={!isValid.title}
 					onChange={onChange}
+					appearance='title'
 				/>
 			</div>
 			<div className={styles['form-row']}>
@@ -88,15 +87,15 @@ export const JournalForm = ({ onSubmit }) => {
 					<img src='/calendar.svg' alt='Иконка календаря' />
 					<span>Дата</span>
 				</label>
-				<input
+				<Input
 					id='date'
 					type='date'
 					name='date'
 					ref={dateRef}
-					value={values.date}
-					className={cn(styles.input, {
-						[styles.invalid]: !isValid.date
-					})}
+					value={
+						values.date ? new Date(values.date).toISOString().slice(0, 10) : ''
+					}
+					isValid={!isValid.date}
 					onChange={onChange}
 				/>
 			</div>
@@ -106,15 +105,13 @@ export const JournalForm = ({ onSubmit }) => {
 					<img src='/folder.svg' alt='Иконка папки' />
 					<span>Метки</span>
 				</label>
-				<input
+				<Input
 					id='tag'
 					type='text'
 					name='tag'
 					ref={tagRef}
 					value={values.tag}
-					className={cn(styles.input, {
-						[styles.invalid]: !isValid.tag
-					})}
+					isValid={!isValid.tag}
 					onChange={onChange}
 				/>
 			</div>
