@@ -2,6 +2,8 @@ import { useContext } from 'react'
 
 import { UserContext } from '@/context/user.context'
 
+import styles from './SelectUser.module.scss'
+
 export const SelectUser = () => {
 	const { userId, setUserId } = useContext(UserContext)
 
@@ -11,6 +13,7 @@ export const SelectUser = () => {
 
 	return (
 		<select
+			className={styles.select}
 			name='user'
 			id='user'
 			value={userId}

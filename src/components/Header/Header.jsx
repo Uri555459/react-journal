@@ -1,21 +1,12 @@
-import { useCallback, useState } from 'react'
+import logoImage from '/logo.svg'
 
-import { Button, Logo, SelectUser } from '@/components'
-
-const logos = ['/logo.svg', '/vite.svg']
+import { Logo, SelectUser } from '@/components'
 
 export const Header = () => {
-	const [logoIndex, setLogoIndex] = useState(0)
-
-	const toggleLogo = useCallback(() => {
-		setLogoIndex(state => Number(!state))
-	}, [])
-
 	return (
 		<header>
-			<Logo image={logos[logoIndex]} />
+			<Logo image={logoImage} />
 			<SelectUser />
-			<Button onClick={toggleLogo}>Сменить логотип</Button>
 		</header>
 	)
 }

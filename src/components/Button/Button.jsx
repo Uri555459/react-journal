@@ -1,9 +1,8 @@
 import cn from 'clsx'
-import { memo } from 'react'
 
 import styles from './Button.module.scss'
 
-export const Button = memo(({ children, onClick = () => {} }) => {
+export const Button = ({ children, onClick = () => {} }) => {
 	return (
 		<button
 			className={cn(styles.button, styles.accent)}
@@ -12,4 +11,4 @@ export const Button = memo(({ children, onClick = () => {} }) => {
 			{children}
 		</button>
 	)
-})
+}

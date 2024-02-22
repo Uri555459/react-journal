@@ -10,7 +10,7 @@ import { INITIAL_STATE, formReducer } from './JournalForm.state'
 
 const DELAY = 2000
 
-export const JournalForm = ({ onSubmit }) => {
+export const JournalForm = ({ onSubmit, data, onDelete }) => {
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
 	const { userId } = useContext(UserContext)
 	const titleRef = useRef()
@@ -38,6 +38,20 @@ export const JournalForm = ({ onSubmit }) => {
 	}
 
 	useEffect(() => {
+		if (!data) {
+			dispatchForm({ type: 'CLEAR' })
+			dispatchForm({
+				type: 'SET_VALUE',
+				payload: { userId }
+			})
+		}
+		dispatchForm({
+			type: 'SET_VALUE',
+			payload: { ...data }
+		})
+	}, [data, userId])
+
+	useEffect(() => {
 		let timerId
 
 		if (!isValid.date || !isValid.text || !isValid.title || !isValid.tag) {
@@ -57,8 +71,12 @@ export const JournalForm = ({ onSubmit }) => {
 		if (isFormReadyToSubmit) {
 			onSubmit(values)
 			dispatchForm({ type: 'CLEAR' })
+			dispatchForm({
+				type: 'SET_VALUE',
+				payload: { userId }
+			})
 		}
-	}, [isFormReadyToSubmit, onSubmit, values])
+	}, [isFormReadyToSubmit, onSubmit, values, userId])
 
 	useEffect(() => {
 		dispatchForm({
@@ -70,6 +88,12 @@ export const JournalForm = ({ onSubmit }) => {
 	const addJournalItem = event => {
 		event.preventDefault()
 		dispatchForm({ type: 'SUBMIT' })
+	}
+
+	const deleteJournalItem = () => {
+		onDelete(data.id)
+		dispatchForm({ type: 'CLEAR' })
+		dispatchForm({ type: 'SET_VALUE', payload: { userId } })
 	}
 
 	const onChange = event => {
@@ -94,6 +118,18 @@ export const JournalForm = ({ onSubmit }) => {
 					onChange={onChange}
 					appearance='title'
 				/>
+				{data?.id && (
+					<button
+						className={styles['delete']}
+						type='button'
+						onClick={deleteJournalItem}
+					>
+						<img
+							src='/archive.svg'
+							alt='Кнопка удалить'
+						/>
+					</button>
+				)}
 			</div>
 			<div className={styles['form-row']}>
 				<label

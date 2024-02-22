@@ -6,7 +6,7 @@ import { UserContext } from '@/context/user.context'
 
 import styles from './JournalList.module.scss'
 
-export const JournalList = ({ items }) => {
+export const JournalList = ({ items, setItem }) => {
 	const { userId } = useContext(UserContext)
 
 	const sortItems = (a, b) => {
@@ -28,12 +28,15 @@ export const JournalList = ({ items }) => {
 
 	return (
 		<div className={styles['journal-list']}>
-			{filteredItems.map(({ title, text, date, id }) => (
-				<CardButton key={id}>
+			{filteredItems.map(el => (
+				<CardButton
+					key={el.id}
+					onClick={() => setItem(el)}
+				>
 					<JournalItem
-						title={title}
-						text={text}
-						date={date}
+						title={el.title}
+						text={el.text}
+						date={el.date}
 					/>
 				</CardButton>
 			))}

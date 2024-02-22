@@ -2,9 +2,12 @@ import { CardButton } from '@/components'
 
 import styles from './JournalAddButton.module.scss'
 
-export const JournalAddButton = () => {
+export const JournalAddButton = ({ clearForm }) => {
 	return (
-		<CardButton className={styles['journal-add']}>
+		<CardButton
+			className={styles['journal-add']}
+			onClick={clearForm}
+		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				width='20'
