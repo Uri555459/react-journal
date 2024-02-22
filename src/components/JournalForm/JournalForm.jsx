@@ -150,7 +150,7 @@ export const JournalForm = ({ onSubmit }) => {
 				})}
 				onChange={onChange}
 			></textarea>
-			<Button text='Сохранить' />
+			<Button>Сохранить</Button>
 		</form>
 	)
 }
