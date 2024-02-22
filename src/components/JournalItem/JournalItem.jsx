@@ -1,7 +1,7 @@
-import styles from './JournalItem.module.scss';
+import styles from './JournalItem.module.scss'
 
 export const JournalItem = ({ title = '', date = new Date(), text = '' }) => {
-	const formattedDate = new Intl.DateTimeFormat('ru-RU').format(date);
+	const formattedDate = new Intl.DateTimeFormat('ru-RU').format(date)
 
 	return (
 		<div className={styles['journal-item']}>
@@ -11,5 +11,5 @@ export const JournalItem = ({ title = '', date = new Date(), text = '' }) => {
 				<div className={styles['journal-item__text']}>{text}</div>
 			</h2>
 		</div>
-	);
-};
+	)
+}

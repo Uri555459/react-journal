@@ -1,5 +1,5 @@
-import styles from './Body.module.scss';
+import styles from './Body.module.scss'
 
 export const Body = ({ children }) => {
-	return <div className={styles.body}>{children}</div>;
-};
+	return <div className={styles.body}>{children}</div>
+}

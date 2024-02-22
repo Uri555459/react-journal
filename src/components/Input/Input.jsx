@@ -1,7 +1,7 @@
-import cn from 'clsx';
-import { forwardRef } from 'react';
+import cn from 'clsx'
+import { forwardRef } from 'react'
 
-import styles from './Input.module.scss';
+import styles from './Input.module.scss'
 
 export const Input = forwardRef(
 	({ className, isValid, appearance = 'text', ...props }, ref) => {
@@ -15,6 +15,6 @@ export const Input = forwardRef(
 				})}
 				{...props}
 			/>
-		);
+		)
 	}
-);
+)

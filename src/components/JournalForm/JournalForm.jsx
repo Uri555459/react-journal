@@ -1,72 +1,82 @@
-import cn from 'clsx';
-import { useEffect, useReducer, useRef } from 'react';
+import cn from 'clsx'
+import { useContext, useEffect, useReducer, useRef } from 'react'
 
-import { Button, Input } from '../';
+import { Button, Input } from '../'
+import { UserContext } from '../../context/user.context'
 
-import styles from './JournalForm.module.scss';
-import { INITIAL_STATE, formReducer } from './JournalForm.state';
+import styles from './JournalForm.module.scss'
+import { INITIAL_STATE, formReducer } from './JournalForm.state'
 
-const DELAY = 2000;
+const DELAY = 2000
 
 export const JournalForm = ({ onSubmit }) => {
-	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
-	const titleRef = useRef();
-	const dateRef = useRef();
-	const tagRef = useRef();
-	const textRef = useRef();
-	const { isValid, isFormReadyToSubmit, values } = formState;
+	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
+	const { userId } = useContext(UserContext)
+	const titleRef = useRef()
+	const dateRef = useRef()
+	const tagRef = useRef()
+	const textRef = useRef()
+
+	const { isValid, isFormReadyToSubmit, values } = formState
 
 	const focusError = isValid => {
 		switch (true) {
 			case !isValid.title:
-				titleRef.current.focus();
-				break;
+				titleRef.current.focus()
+				break
 			case !isValid.date:
-				dateRef.current.focus();
-				break;
+				dateRef.current.focus()
+				break
 			case !isValid.tag:
-				tagRef.current.focus();
-				break;
+				tagRef.current.focus()
+				break
 			case !isValid.text:
-				textRef.current.focus();
-				break;
+				textRef.current.focus()
+				break
 		}
-	};
+	}
 
 	useEffect(() => {
-		let timerId;
+		let timerId
 
 		if (!isValid.date || !isValid.text || !isValid.title || !isValid.tag) {
-			focusError(isValid);
+			focusError(isValid)
 
 			timerId = setTimeout(() => {
-				dispatchForm({ type: 'RESET_VALIDITY' });
-			}, DELAY);
+				dispatchForm({ type: 'RESET_VALIDITY' })
+			}, DELAY)
 		}
 
 		return () => {
-			clearTimeout(timerId);
-		};
-	}, [isValid]);
+			clearTimeout(timerId)
+		}
+	}, [isValid])
 
 	useEffect(() => {
 		if (isFormReadyToSubmit) {
-			onSubmit(values);
-			dispatchForm({ type: 'CLEAR' });
+			onSubmit(values)
+			dispatchForm({ type: 'CLEAR' })
 		}
-	}, [isFormReadyToSubmit, onSubmit, values]);
+	}, [isFormReadyToSubmit, onSubmit, values])
+
+	useEffect(() => {
+		dispatchForm({
+			type: 'SET_VALUE',
+			payload: { userId }
+		})
+	}, [userId])
 
 	const addJournalItem = event => {
-		event.preventDefault();
-		dispatchForm({ type: 'SUBMIT' });
-	};
+		event.preventDefault()
+		dispatchForm({ type: 'SUBMIT' })
+	}
 
 	const onChange = event => {
 		dispatchForm({
 			type: 'SET_VALUE',
 			payload: { [event.target.name]: event.target.value }
-		});
-	};
+		})
+	}
 
 	return (
 		<form
@@ -142,5 +152,5 @@ export const JournalForm = ({ onSubmit }) => {
 			></textarea>
 			<Button text='Сохранить' />
 		</form>
-	);
-};
+	)
+}

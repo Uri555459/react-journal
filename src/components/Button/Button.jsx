@@ -1,6 +1,6 @@
-import cn from 'clsx';
+import cn from 'clsx'
 
-import styles from './Button.module.scss';
+import styles from './Button.module.scss'
 
 export const Button = ({ text = '', onClick = () => {} }) => {
 	return (
@@ -10,5 +10,5 @@ export const Button = ({ text = '', onClick = () => {} }) => {
 		>
 			{text}
 		</button>
-	);
-};
+	)
+}

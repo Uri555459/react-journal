@@ -1,4 +1,4 @@
-import styles from './Logo.module.scss';
+import styles from './Logo.module.scss'
 
 export const Logo = ({ image }) => {
 	return (
@@ -7,5 +7,5 @@ export const Logo = ({ image }) => {
 			src={image}
 			alt='Логотип журнала'
 		/>
-	);
-};
+	)
+}

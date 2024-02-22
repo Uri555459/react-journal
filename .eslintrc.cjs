@@ -21,4 +21,4 @@ module.exports = {
 		'react/display-name': 'off',
 		indent: 'off'
 	}
-};
+}
