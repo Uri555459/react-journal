@@ -1,23 +1,22 @@
-import { Body, LeftPanel } from './layouts'
+import styles from './App.module.scss';
 import {
 	Header,
 	JournalAddButton,
 	JournalForm,
 	JournalList
-} from './components'
-import { useLocalStorage } from './hooks/useLocalStorage.hook'
-
-import styles from './App.module.scss'
+} from './components';
+import { useLocalStorage } from './hooks/useLocalStorage.hook';
+import { Body, LeftPanel } from './layouts';
 
 const mapItems = items => {
 	if (!items) {
-		return []
+		return [];
 	}
-	return items.map(item => ({ ...item, date: new Date(item.date) }))
-}
+	return items.map(item => ({ ...item, date: new Date(item.date) }));
+};
 
 export const App = () => {
-	const [items, setItems] = useLocalStorage('data')
+	const [items, setItems] = useLocalStorage('data');
 
 	const addItem = item => {
 		setItems([
@@ -28,8 +27,8 @@ export const App = () => {
 				date: new Date(item.date),
 				text: item.text
 			}
-		])
-	}
+		]);
+	};
 
 	return (
 		<div className={styles.app}>
@@ -42,5 +41,5 @@ export const App = () => {
 				<JournalForm onSubmit={addItem} />
 			</Body>
 		</div>
-	)
-}
+	);
+};

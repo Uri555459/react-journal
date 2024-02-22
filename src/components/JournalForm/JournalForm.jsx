@@ -1,76 +1,78 @@
-import { useEffect, useReducer, useRef } from 'react'
-import cn from 'clsx'
+import cn from 'clsx';
+import { useEffect, useReducer, useRef } from 'react';
 
-import { Button, Input } from '../'
+import { Button, Input } from '../';
 
-import { INITIAL_STATE, formReducer } from './JournalForm.state'
+import styles from './JournalForm.module.scss';
+import { INITIAL_STATE, formReducer } from './JournalForm.state';
 
-import styles from './JournalForm.module.scss'
-
-const DELAY = 2000
+const DELAY = 2000;
 
 export const JournalForm = ({ onSubmit }) => {
-	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
-	const titleRef = useRef()
-	const dateRef = useRef()
-	const tagRef = useRef()
-	const textRef = useRef()
-	const { isValid, isFormReadyToSubmit, values } = formState
+	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
+	const titleRef = useRef();
+	const dateRef = useRef();
+	const tagRef = useRef();
+	const textRef = useRef();
+	const { isValid, isFormReadyToSubmit, values } = formState;
 
 	const focusError = isValid => {
 		switch (true) {
 			case !isValid.title:
-				titleRef.current.focus()
-				break
+				titleRef.current.focus();
+				break;
 			case !isValid.date:
-				dateRef.current.focus()
-				break
+				dateRef.current.focus();
+				break;
 			case !isValid.tag:
-				tagRef.current.focus()
-				break
+				tagRef.current.focus();
+				break;
 			case !isValid.text:
-				textRef.current.focus()
-				break
+				textRef.current.focus();
+				break;
 		}
-	}
+	};
 
 	useEffect(() => {
-		let timerId
+		let timerId;
 
 		if (!isValid.date || !isValid.text || !isValid.title || !isValid.tag) {
-			focusError(isValid)
+			focusError(isValid);
 
 			timerId = setTimeout(() => {
-				dispatchForm({ type: 'RESET_VALIDITY' })
-			}, DELAY)
+				dispatchForm({ type: 'RESET_VALIDITY' });
+			}, DELAY);
 		}
 
 		return () => {
-			clearTimeout(timerId)
-		}
-	}, [isValid])
+			clearTimeout(timerId);
+		};
+	}, [isValid]);
 
 	useEffect(() => {
 		if (isFormReadyToSubmit) {
-			onSubmit(values)
-			dispatchForm({ type: 'CLEAR' })
+			onSubmit(values);
+			dispatchForm({ type: 'CLEAR' });
 		}
-	}, [isFormReadyToSubmit, onSubmit, values])
+	}, [isFormReadyToSubmit, onSubmit, values]);
 
 	const addJournalItem = event => {
-		event.preventDefault()
-		dispatchForm({ type: 'SUBMIT' })
-	}
+		event.preventDefault();
+		dispatchForm({ type: 'SUBMIT' });
+	};
 
 	const onChange = event => {
 		dispatchForm({
 			type: 'SET_VALUE',
 			payload: { [event.target.name]: event.target.value }
-		})
-	}
+		});
+	};
 
 	return (
-		<form className={styles['journal-form']} onSubmit={addJournalItem}>
+		<form
+			className={styles['journal-form']}
+			onSubmit={addJournalItem}
+		>
 			<div className={styles['form-row']}>
 				<Input
 					type='text'
@@ -83,8 +85,14 @@ export const JournalForm = ({ onSubmit }) => {
 				/>
 			</div>
 			<div className={styles['form-row']}>
-				<label htmlFor='date' className={styles['form-label']}>
-					<img src='/calendar.svg' alt='Иконка календаря' />
+				<label
+					htmlFor='date'
+					className={styles['form-label']}
+				>
+					<img
+						src='/calendar.svg'
+						alt='Иконка календаря'
+					/>
 					<span>Дата</span>
 				</label>
 				<Input
@@ -101,8 +109,14 @@ export const JournalForm = ({ onSubmit }) => {
 			</div>
 
 			<div className={styles['form-row']}>
-				<label htmlFor='tag' className={styles['form-label']}>
-					<img src='/folder.svg' alt='Иконка папки' />
+				<label
+					htmlFor='tag'
+					className={styles['form-label']}
+				>
+					<img
+						src='/folder.svg'
+						alt='Иконка папки'
+					/>
 					<span>Метки</span>
 				</label>
 				<Input
@@ -128,5 +142,5 @@ export const JournalForm = ({ onSubmit }) => {
 			></textarea>
 			<Button text='Сохранить' />
 		</form>
-	)
-}
+	);
+};

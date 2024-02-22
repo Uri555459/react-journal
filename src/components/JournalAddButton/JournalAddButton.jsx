@@ -1,5 +1,6 @@
-import { CardButton } from '../'
-import styles from './JournalAddButton.module.scss'
+import { CardButton } from '../';
+
+import styles from './JournalAddButton.module.scss';
 
 export const JournalAddButton = () => {
 	return (
@@ -28,5 +29,5 @@ export const JournalAddButton = () => {
 			</svg>
 			Новое воспоминание
 		</CardButton>
-	)
-}
+	);
+};

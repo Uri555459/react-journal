@@ -1,2 +1,2 @@
-export { LeftPanel } from './LeftPanel/LeftPanel'
-export { Body } from './Body/Body'
+export { LeftPanel } from './LeftPanel/LeftPanel';
+export { Body } from './Body/Body';
