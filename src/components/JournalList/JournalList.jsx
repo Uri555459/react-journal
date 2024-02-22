@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 
 import { CardButton, JournalItem } from '@/components'
 
@@ -9,9 +9,6 @@ import styles from './JournalList.module.scss'
 export const JournalList = ({ items }) => {
 	const { userId } = useContext(UserContext)
 
-	if (items.length === 0) {
-		return <p>Записей нет, добавьте запись</p>
-	}
 	const sortItems = (a, b) => {
 		if (a.date < b.date) {
 			return 1
@@ -20,20 +17,26 @@ export const JournalList = ({ items }) => {
 		}
 	}
 
+	const filteredItems = useMemo(
+		() => items.filter(el => el.userId === userId).sort(sortItems),
+		[items, userId]
+	)
+
+	if (items.length === 0) {
+		return <p>Записей нет, добавьте запись</p>
+	}
+
 	return (
 		<div className={styles['journal-list']}>
-			{items
-				.filter(el => el.userId === userId)
-				.sort(sortItems)
-				.map(({ title, text, date, id }) => (
-					<CardButton key={id}>
-						<JournalItem
-							title={title}
-							text={text}
-							date={date}
-						/>
-					</CardButton>
-				))}
+			{filteredItems.map(({ title, text, date, id }) => (
+				<CardButton key={id}>
+					<JournalItem
+						title={title}
+						text={text}
+						date={date}
+					/>
+				</CardButton>
+			))}
 		</div>
 	)
 }
