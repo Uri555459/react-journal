@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 
-import { CardButton } from '../'
-import { JournalItem } from '../'
-import { UserContext } from '../../context/user.context'
+import { CardButton, JournalItem } from '@/components'
+
+import { UserContext } from '@/context/user.context'
 
 import styles from './JournalList.module.scss'
 

@@ -1,7 +1,15 @@
-import { Header, JournalAddButton, JournalForm, JournalList } from '../'
-import { UserContextProvider } from '../../context/user.context'
-import { useLocalStorage } from '../../hooks/useLocalStorage.hook'
-import { Body, LeftPanel } from '../../layouts'
+import {
+	Header,
+	JournalAddButton,
+	JournalForm,
+	JournalList
+} from '@/components'
+
+import { Body, LeftPanel } from '@/layouts'
+
+import { useLocalStorage } from '@/hooks/useLocalStorage.hook'
+
+import { UserContextProvider } from '@/context/user.context'
 
 import styles from './App.module.scss'
 

@@ -1,8 +1,9 @@
 import cn from 'clsx'
 import { useContext, useEffect, useReducer, useRef } from 'react'
 
-import { Button, Input } from '../'
-import { UserContext } from '../../context/user.context'
+import { Button, Input } from '@/components'
+
+import { UserContext } from '@/context/user.context'
 
 import styles from './JournalForm.module.scss'
 import { INITIAL_STATE, formReducer } from './JournalForm.state'

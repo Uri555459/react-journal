@@ -1,20 +1,18 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
-import { Button, Logo, SelectUser } from '../'
-
-import styles from './Header.module.scss'
+import { Button, Logo, SelectUser } from '@/components'
 
 const logos = ['/logo.svg', '/vite.svg']
 
 export const Header = () => {
 	const [logoIndex, setLogoIndex] = useState(0)
 
-	const toggleLogo = () => {
+	const toggleLogo = useCallback(() => {
 		setLogoIndex(state => Number(!state))
-	}
+	}, [])
 
 	return (
-		<header className={styles.header}>
+		<header>
 			<Logo image={logos[logoIndex]} />
 			<SelectUser />
 			<Button onClick={toggleLogo}>Сменить логотип</Button>

@@ -1,4 +1,4 @@
-import { CardButton } from '../'
+import { CardButton } from '@/components'
 
 import styles from './JournalAddButton.module.scss'
 

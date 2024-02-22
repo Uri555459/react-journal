@@ -1,6 +1,8 @@
+import { memo } from 'react'
+
 import styles from './Logo.module.scss'
 
-export const Logo = ({ image }) => {
+export const Logo = memo(({ image }) => {
 	return (
 		<img
 			className={styles.logo}
@@ -8,4 +10,4 @@ export const Logo = ({ image }) => {
 			alt='Логотип журнала'
 		/>
 	)
-}
+})

@@ -10,7 +10,9 @@
 	"importOrder": [
 		"<THIRD_PARTY_MODULES>",
 		"^@/components/(.*)$",
+		"^@/components",
 		"^@/layout/(.*)$",
+		"^@/layout",
 		"^@/ui/(.*)$",
 		"^@/providers/(.*)$",
 		"^@/constants/(.*)$",
@@ -20,7 +22,7 @@
 		"^@/store/(.*)$",
 		"^@/hooks/(.*)$",
 		"^@/utils/(.*)$",
-		"^@/api/(.*)$",
+		"^@/context/(.*)$",
 		"^../(.*)$",
 		"^./(.*)$",
 		"(.scss)$"
